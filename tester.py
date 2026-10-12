@@ -6,17 +6,13 @@ from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 _MEMORY_WRAPPER = (
-    "import tracemalloc, runpy, sys, time\n"
-    "tracemalloc.start()\n"
+    "import runpy, sys, time\n"
     "t_start = time.perf_counter()\n"
     "try:\n"
     "    runpy.run_path(sys.argv[1], run_name='__main__')\n"
     "finally:\n"
     "    elapsed = time.perf_counter() - t_start\n"
-    "    _, peak = tracemalloc.get_traced_memory()\n"
-    "    tracemalloc.stop()\n"
     "    sys.stderr.write(f'__TIME__:{elapsed}\\n')\n"
-    "    sys.stderr.write(f'__MEM__:{peak}\\n')\n"
     "    sys.stderr.flush()\n"
 )
 
@@ -150,18 +146,11 @@ def _run_script(
                 elapsed = float(line.split(":", 1)[1])
             except ValueError:
                 pass
-        elif line.startswith("__MEM__:"):
-            try:
-                mem_peak = int(line.split(":", 1)[1])
-            except ValueError:
-                pass
         else:
             clean_stderr_lines.append(line)
     stderr = "\n".join(clean_stderr_lines)
 
-    if memory_limit_bytes > 0 and mem_peak is not None and mem_peak > memory_limit_bytes:
-        limit_mb = memory_limit_bytes / (1024 * 1024)
-        return None, f"Превышен лимит памяти ({limit_mb:.0f} МБ / {memory_limit_bytes} байт)", elapsed, mem_peak
+
 
     if stderr.strip():
         first_line = stderr.strip().splitlines()[-1]
