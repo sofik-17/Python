@@ -21,47 +21,46 @@ match a:
         print("восемьсот")
     case 9:
         print("девятьсот")
-    case _:
-        print("")
-match b,c:
-    case 1,0:
-        print("десять", "")
-    case 1,1:
-        print("одиннадцать", "")
-    case 1,2:
-        print("двенадцать", "")
-    case 1,3:
-        print("тринадцать", "")
-    case 1,4:
-        print("четырнадцать", "")
-    case 1,5:
-        print("пятнадцать", "")
-    case 1,6:
-        print("шестнадцать", "")
-    case 1,7:
-        print("семнадцать", "")
-    case 1,8:
-        print("восемьнадцать", "")
-    case 1,9:
-        print("девятнадцать", "")
-    case 2,_:
+if b == 1:
+    match c:
+     case 0:
+        print("десять")
+     case 1:
+        print("одиннадцать")
+     case 2:
+        print("двенадцать")
+     case 3:
+        print("тринадцать")
+     case 4:
+        print("четырнадцать")
+     case 5:
+        print("пятнадцать")
+     case 6:
+        print("шестнадцать")
+     case 7:
+        print("семнадцать")
+     case 8:
+        print("восемнадцать")
+     case 9:
+        print("девятнадцать")
+else:
+    match c:
+     case 2:
         print("двадцать")
-    case 3,_:
+     case 3:
         print("тридцать")
-    case 4,_:
+     case 4:
         print("сорок")
-    case 5,_:
+     case 5:
         print("пятьдесят")
-    case 6,_:
+     case 6:
         print("шестьдесят")
-    case 7,_:
+     case 7:
         print("семьдесят")
-    case 8,_:
+     case 8:
         print("восемьдесят")
-    case 9,_:
+     case 9:
         print("девяносто")
-    case _:
-        print("")
 if b != 1:
     match c:
          case 1:
@@ -82,8 +81,3 @@ if b != 1:
             print("восемь")
          case 9:
             print("девять")
-         case _:
-            print("")
-else:
-    print("")
-print(a,b,c)
