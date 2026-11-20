@@ -1,1 +1,9 @@
-
+max_num = -float("inf")
+count = 0
+while (n := int(input())) != 0:
+    if n > max_num:
+        max_num = n
+        count = 1
+    elif n == max_num:
+        count += 1
+print(count)
